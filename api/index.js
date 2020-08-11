@@ -10,8 +10,8 @@ const client = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
-const node_env = process.env.NODE_ENV || 'develop';
-const isProduction = node_env === 'production';
+const deploy_env = process.env.DEPLOY_ENV || 'develop';
+const isProduction = deploy_env === 'production';
 
 module.exports = async (req, res) => {
   const { id } = req.query;
@@ -43,9 +43,9 @@ module.exports = async (req, res) => {
   }
 
   if (isProduction) {
-    res.setHeader("Cache-Control", `public, max-age=${60 * 60}`);
+    res.setHeader('Cache-Control', `public, max-age=${60 * 60}`);
   }
 
-  res.setHeader("Content-Type", "image/svg+xml");
+  res.setHeader('Content-Type', 'image/svg+xml');
   res.send(svg);
 };
