@@ -13,7 +13,7 @@ const getBase64Image = async (url) => {
   return 'data:image/png;base64,' + arrayBuffer.toString('base64');
 };
 
-const appendDefs = node => {
+const appendDefs = (node, option) => {
   // append css
   node.append('style').html(css);
   // append clipPath
@@ -38,16 +38,16 @@ const appendDefs = node => {
     .attr('stop-opacity', 0);
 };
 
-const appendBackground = node => {
+const appendBackground = (node, option) => {
   node.append('rect')
     .attr('class', 'card-bg')
     .attr('x', 0.5).attr('y', 0.5)
     .attr('rx', 4.5)
-    .attr('width', 299)
+    .attr('width', option.width - 1)
     .attr('height', "99%");
 };
 
-const appendHeader = node => {
+const appendHeader = (node, option) => {
   // append twitter icon
   node.append('g')
     .attr('transform', 'translate(20, 10)')
@@ -63,7 +63,7 @@ const appendHeader = node => {
       .text('Latest Tweets');
 };
 
-const appendTweet = (node, context) => {
+const appendTweet = (node, context, option) => {
   const { x, y, icon, text, user } = context;
 
   const g = node.append('g')
@@ -72,7 +72,7 @@ const appendTweet = (node, context) => {
 
   g.append('line')
     .attr('x1', 0).attr('y1', 0)
-    .attr('x2', 290).attr('y2', 0)
+    .attr('x2', option.width - 10).attr('y2', 0)
     .attr('stroke', '#aaa')
     .attr('stroke-width', 0.5);
 
@@ -89,7 +89,7 @@ const appendTweet = (node, context) => {
   
   const tweet = g.append('foreignObject')
     .attr('x', 50).attr('y', 0)
-    .attr('width', 240).attr('height', 70)
+    .attr('width', option.width - 60).attr('height', 70)
     .append('div')
       .attr('xmlns', 'http://www.w3.org/1999/xhtml')
       .attr('class', 'tw-wrapper')
@@ -117,21 +117,20 @@ const appendTweet = (node, context) => {
   
   g.append('rect')
     .attr('x', 50).attr('y', 55)
-    .attr('width', 240).attr('height', 15)
+    .attr('width', option.width - 60).attr('height', 15)
     .attr('fill', 'url(#lg0)');
-
 };
 
-const createSVG = async (tweets) => {
+const createSVG = async (tweets, option) => {
   const document = new JSDOM().window.document;
   const svg = d3.select(document.body).append("svg")
-    .attr('width', 300).attr('height', 285)
-    .attr('viewBox', "0 0 300 285")
+    .attr('width', option.width).attr('height', option.height)
+    .attr('viewBox', `0 0 ${option.width} ${option.height}`)
     .attr('xmlns', 'http://www.w3.org/2000/svg');
 
-  appendDefs(svg.append('defs'));
-  appendBackground(svg);
-  appendHeader(svg);
+  appendDefs(svg.append('defs'), option);
+  appendBackground(svg, option);
+  appendHeader(svg, option);
 
   const icon = await getBase64Image(tweets[0].user.profile_image_url_https)
     .catch(() => undefined);
@@ -141,7 +140,7 @@ const createSVG = async (tweets) => {
       x: 5, y: 50 + (index * 80),
       icon: icon,
       ...tweet
-    });
+    }, option);
   });
 
   return document.body.innerHTML;

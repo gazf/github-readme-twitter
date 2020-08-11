@@ -2,6 +2,7 @@
 
 const Twitter = require('twitter');
 const createSVG = require('../src/createSVG');
+const layouts = require('../src/layouts');
 
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -14,14 +15,15 @@ const deploy_env = process.env.DEPLOY_ENV || 'develop';
 const isProduction = deploy_env === 'production';
 
 module.exports = async (req, res) => {
-  const { id } = req.query;
+  const { id, layout = 'normal' } = req.query;
 
   if (!id) {
     res.status(400).send('Bad Parameter.');
     return;
   }
 
-  const params = { screen_name: id, count: 3 };
+  const option = layouts[layout] || layouts.normal;
+  const params = { screen_name: id, count: option.count };
   const tweets = await client.get('statuses/user_timeline', params).catch(e => {
     console.error(e);
     return undefined;
@@ -32,7 +34,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const svg = await createSVG(tweets).catch(e => {
+  const svg = await createSVG(tweets, option).catch(e => {
     console.error(e);
     return undefined;
   });
