@@ -1,0 +1,19 @@
+{
+  "name": "github-readme-twitter",
+  "version": "0.0.1",
+  "description": "Add Twitter to your github readme",
+  "main": "api/index.js",
+  "scripts":{
+    "server": "node src/server.js"
+  },
+  "author": "gazf",
+  "dependencies": {
+    "d3": "^5.16.0",
+    "jsdom": "^16.3.0",
+    "node-fetch": "^2.6.0",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}
