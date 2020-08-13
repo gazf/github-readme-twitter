@@ -2,7 +2,7 @@
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 
 ## What is this?
-Display the latest 3 tweets on your github readme.
+Display the latest tweets on your github readme.
 
 ## Usage
 Insert the code below into your Github readme.
@@ -14,10 +14,15 @@ Change the `?id=` value to your Twitter's screen name.
 
 ## Example
 ### @twitter
+
+`https://github-readme-twitter.gazf.vercel.app/api?id=twitter`
+
 [![github-readme-twitter](https://github-readme-twitter.gazf.vercel.app/api?id=twitter)](https://github.com/gazf/github-readme-twitter)
 
 ### @nodejs
 Add `?layout=wide` parameter
+
+`https://github-readme-twitter.gazf.vercel.app/api?id=nodejs&layout=wide`
 
 [![github-readme-twitter](https://github-readme-twitter.gazf.vercel.app/api?id=nodejs&layout=wide)](https://github.com/gazf/github-readme-twitter)
 
