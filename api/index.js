@@ -15,15 +15,33 @@ const deploy_env = process.env.DEPLOY_ENV || 'develop';
 const isProduction = deploy_env === 'production';
 
 module.exports = async (req, res) => {
-  const { id, layout = 'normal' } = req.query;
+  const {
+    id,
+    layout = 'normal',
+    show_border = 'on',
+    show_retweet = 'on',
+    show_reply = 'on'
+  } = req.query;
 
   if (!id) {
     res.status(400).send('Bad Parameter.');
     return;
   }
 
-  const option = layouts[layout] || layouts.normal;
-  const params = { screen_name: id, count: option.count };
+  const option = { 
+    show_border: show_border === 'on',
+    show_retweet: show_retweet === 'on',
+    show_reply: show_reply === 'on',
+    ...(layouts[layout] || layouts.normal)
+  };
+
+  const params = {
+    screen_name: id,
+    count: 10,
+    include_rts: option.show_retweet,
+    exclude_replies: !option.show_reply
+  };
+
   const tweets = await client.get('statuses/user_timeline', params).catch(e => {
     console.error(e);
     return undefined;

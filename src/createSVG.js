@@ -39,12 +39,14 @@ const appendDefs = (node, option) => {
 };
 
 const appendBackground = (node, option) => {
-  node.append('rect')
-    .attr('class', 'card-bg')
-    .attr('x', 0.5).attr('y', 0.5)
-    .attr('rx', 4.5)
-    .attr('width', option.width - 1)
-    .attr('height', "99%");
+  if (option.show_border) {
+    node.append('rect')
+      .attr('class', 'card-bg')
+      .attr('x', 0.5).attr('y', 0.5)
+      .attr('rx', 4.5)
+      .attr('width', option.width - 1)
+      .attr('height', "99%");
+  }
 };
 
 const appendHeader = (node, option) => {
@@ -96,22 +98,18 @@ const appendTweet = (node, context, option) => {
       .attr('height', '100%');
   
   const header = tweet.append('p')
-    .attr('xmlns', 'http://www.w3.org/1999/xhtml')
     .attr('class', 'tw-header')
     .attr('width', '100%');
   
   header.append('span')
-    .attr('xmlns', 'http://www.w3.org/1999/xhtml')
     .attr('class', 'tw-name')
     .text(user.name);
   
   header.append('span')
-    .attr('xmlns', 'http://www.w3.org/1999/xhtml')
     .attr('class', 'tw-screen-name')
     .text(`@${user.screen_name}`);
   
   tweet.append('p')
-    .attr('xmlns', 'http://www.w3.org/1999/xhtml')
     .attr('class', 'tw-text')
     .text(text);
   
@@ -122,8 +120,11 @@ const appendTweet = (node, context, option) => {
 };
 
 const createSVG = async (tweets, option) => {
+  const getIconAsync = getBase64Image(tweets[0].user.profile_image_url_https)
+    .catch(() => undefined);
+
   const document = new JSDOM().window.document;
-  const svg = d3.select(document.body).append("svg")
+  const svg = d3.select(document.body).append('svg')
     .attr('width', option.width).attr('height', option.height)
     .attr('viewBox', `0 0 ${option.width} ${option.height}`)
     .attr('xmlns', 'http://www.w3.org/2000/svg');
@@ -132,10 +133,8 @@ const createSVG = async (tweets, option) => {
   appendBackground(svg, option);
   appendHeader(svg, option);
 
-  const icon = await getBase64Image(tweets[0].user.profile_image_url_https)
-    .catch(() => undefined);
-
-  tweets.forEach((tweet, index) => {
+  const icon = await getIconAsync;
+  tweets.slice(0, option.count).forEach((tweet, index) => {
     appendTweet(svg, {
       x: 5, y: 50 + (index * 80),
       icon: icon,
