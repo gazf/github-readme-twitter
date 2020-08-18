@@ -1,6 +1,6 @@
 {
   "name": "github-readme-twitter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Add Twitter to your github readme",
   "main": "api/index.js",
   "repository": {
