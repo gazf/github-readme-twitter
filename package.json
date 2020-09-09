@@ -9,7 +9,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "test": "jest"
   },
   "author": "gazf",
   "dependencies": {
@@ -19,6 +20,8 @@
     "twitter": "^1.7.1"
   },
   "devDependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "jest": "^26.4.2",
+    "supertest": "^4.0.2"
   }
 }
