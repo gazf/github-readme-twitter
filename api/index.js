@@ -43,8 +43,8 @@ module.exports = async (req, res) => {
   };
 
   const tweets = await client.get('statuses/user_timeline', params).catch(e => {
-    //console.log(e);
-    return null;
+    console.error(e);
+    return undefined;
   });
 
   if (!tweets) {
@@ -52,10 +52,8 @@ module.exports = async (req, res) => {
     return;
   }
 
-  //console.log('start create svg');
-
   const svg = await createSVG(tweets, option).catch(e => {
-    //console.log(e);
+    console.error(e);
     return undefined;
   });
 
