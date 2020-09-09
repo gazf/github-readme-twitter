@@ -43,8 +43,8 @@ module.exports = async (req, res) => {
   };
 
   const tweets = await client.get('statuses/user_timeline', params).catch(e => {
-    console.error(e);
-    return undefined;
+    //console.log(e);
+    return null;
   });
 
   if (!tweets) {
@@ -52,8 +52,10 @@ module.exports = async (req, res) => {
     return;
   }
 
+  //console.log('start create svg');
+
   const svg = await createSVG(tweets, option).catch(e => {
-    console.error(e);
+    //console.log(e);
     return undefined;
   });
 
@@ -66,6 +68,7 @@ module.exports = async (req, res) => {
     res.setHeader('Cache-Control', `public, max-age=${60 * 60}`);
   }
 
+  res.status(200);
   res.setHeader('Content-Type', 'image/svg+xml');
   res.send(svg);
 };
