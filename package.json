@@ -15,7 +15,7 @@
   "author": "gazf",
   "dependencies": {
     "d3": "^6.1.1",
-    "jsdom": "^16.3.0",
+    "jsdom": "^17.0.0",
     "node-fetch": "^2.6.0",
     "twitter": "^1.7.1"
   },
