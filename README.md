@@ -28,7 +28,7 @@ Add `?layout=wide` parameter
 
 ## Available parameters
 ### `id`
-Specify the scree name of twitter.
+Specify the screen name of twitter.
 
 **`id` must always be specified.**
 
