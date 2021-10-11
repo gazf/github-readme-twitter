@@ -59,10 +59,5 @@ Specify whether to display reply.
 + `on`: display reply **(default)**
 + `off`: hide reply
 
-### `dark_mode` (optional)
-Specify whether to display reply.
-+ `on`: use darkmode
-+ `off`: **(default)**
-
 ## Host with your Vercel account
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?s=https%3A%2F%2Fgithub.com%2Fgazf%2Fgithub-readme-twitter)

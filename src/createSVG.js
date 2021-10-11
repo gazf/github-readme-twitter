@@ -24,35 +24,38 @@ const appendDefs = (node, option) => {
       .attr('cx', 20)
       .attr('cy', 20);
   // append linearGradient
-  const lg = node.append('linearGradient')
+  // default
+  const lg0 = node.append('linearGradient')
     .attr('id', 'lg0')
     .attr('x1', '0%').attr('y1', '100%')
     .attr('x2', '0%').attr('y2', '0%')
-  if(option.dark_mode) {
-    lg.append('stop')
-      .attr('offset', 0)
-      .attr('stop-color', '#000')
-      .attr('stop-opacity', 1);
-    lg.append('stop')
-      .attr('offset', '100%')
-      .attr('stop-color', '#000')
-      .attr('stop-opacity', 0);
-  } else {
-    lg.append('stop')
-      .attr('offset', 0)
-      .attr('stop-color', '#fff')
-      .attr('stop-opacity', 1);
-    lg.append('stop')
-      .attr('offset', '100%')
-      .attr('stop-color', '#fff')
-      .attr('stop-opacity', 0);
-  }
+  lg0.append('stop')
+    .attr('offset', 0)
+    .attr('stop-color', '#fff')
+    .attr('stop-opacity', 1);
+  lg0.append('stop')
+    .attr('offset', '100%')
+    .attr('stop-color', '#fff')
+    .attr('stop-opacity', 0);
+  // dark mode
+  const lg1 = node.append('linearGradient')
+    .attr('id', 'lg1')
+    .attr('x1', '0%').attr('y1', '100%')
+    .attr('x2', '0%').attr('y2', '0%');
+  lg1.append('stop')
+    .attr('offset', 0)
+    .attr('stop-color', '#000')
+    .attr('stop-opacity', 1);
+  lg1.append('stop')
+    .attr('offset', '100%')
+    .attr('stop-color', '#000')
+    .attr('stop-opacity', 0);
 };
 
 const appendBackground = (node, option) => {
   if (option.show_border) {
     node.append('rect')
-      .attr('class', !option.dark_mode ? 'card-bg' : 'card-bg darkmode')
+      .attr('class', 'card-bg')
       .attr('x', 0.5).attr('y', 0.5)
       .attr('rx', 4.5)
       .attr('width', option.width - 1)
@@ -71,7 +74,7 @@ const appendHeader = (node, option) => {
     .attr('transform', 'translate(65, 35)')
     .attr('x', 0).attr('y', 0)
     .append('text')
-      .attr('class', !option.dark_mode ? 'header' : 'header darkmode')
+      .attr('class', 'header')
       .attr('x', 0).attr('y', 0)
       .text('Latest Tweets');
 };
@@ -113,21 +116,21 @@ const appendTweet = (node, context, option) => {
     .attr('width', '100%');
   
   header.append('span')
-    .attr('class', !option.dark_mode ? 'tw-name' : 'tw-name darkmode')
+    .attr('class', 'tw-name')
     .text(user.name);
   
   header.append('span')
-    .attr('class', !option.dark_mode ? 'tw-screen-name' : 'tw-screen-name darkmode')
+    .attr('class', 'tw-screen-name')
     .text(`@${user.screen_name}`);
   
   tweet.append('p')
-    .attr('class', !option.dark_mode ? 'tw-text' : 'tw-text darkmode')
+    .attr('class', 'tw-text')
     .text(text);
   
   g.append('rect')
+    .attr('class', 'fadeout')
     .attr('x', 50).attr('y', 55)
-    .attr('width', option.width - 60).attr('height', 15)
-    .attr('fill', 'url(#lg0)');
+    .attr('width', option.width - 60).attr('height', 15);
 };
 
 const createSVG = async (tweets, option) => {

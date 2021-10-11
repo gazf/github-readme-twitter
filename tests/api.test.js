@@ -48,8 +48,5 @@ describe("Test /api", () => {
     const response = await request(app).get("/api?id=twitter&dark_mode=on");
     expect(response.statusCode).toBe(200);
     expect(response.type).toBe('image/svg+xml');
-
-    const document = new JSDOM(response.body.toString()).window.document;
-    expect(document.getElementsByClassName('darkmode')[0]).toBeDefined();
   });
 });
