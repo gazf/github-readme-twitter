@@ -26,13 +26,6 @@ Add `?layout=wide` parameter
 
 [![github-readme-twitter](https://github-readme-twitter.gazf.vercel.app/api?id=nodejs&layout=wide)](https://github.com/gazf/github-readme-twitter)
 
-### @github
-Add `?dark_mode=on` parameter
-
-`https://github-readme-twitter.gazf.vercel.app/api?id=github&dark_mode=on`
-
-[![github-readme-twitter](https://github-readme-twitter.gazf.vercel.app/api?id=github&dark_mode=on)](https://github.com/gazf/github-readme-twitter)
-
 ## Available parameters
 ### `id`
 Specify the screen name of twitter.
