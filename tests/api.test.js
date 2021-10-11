@@ -1,8 +1,8 @@
 'use strict';
 
-const { JSDOM } = require('jsdom');
-const request = require('supertest');
-const app = require('../src/app');
+import { JSDOM } from 'jsdom'
+import request from 'supertest'
+import app from '../src/app.js'
 
 describe("Test /api", () => {
   test("should get the default query", async () => {

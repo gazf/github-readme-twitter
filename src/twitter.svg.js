@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = `
+export default `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="70 70 300 300" width="40" height="40">
   <defs>
     <style>.cls-icon{fill:#1da1f2;}</style>
