@@ -20,8 +20,7 @@ export default async (req, res) => {
     layout = 'normal',
     show_border = 'on',
     show_retweet = 'on',
-    show_reply = 'on',
-    dark_mode = 'off'
+    show_reply = 'on'
   } = req.query;
 
   if (!id) {
@@ -33,7 +32,6 @@ export default async (req, res) => {
     show_border: show_border === 'on',
     show_retweet: show_retweet === 'on',
     show_reply: show_reply === 'on',
-    dark_mode: dark_mode === 'on',
     ...(layouts[layout] || layouts.normal)
   };
 
