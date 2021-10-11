@@ -1,6 +1,6 @@
 'use strict'
-// use local develop
-const app = require('./app');
+
+import app from './app.js'
 const port = 9000;
 
 app.listen(port, () => {

@@ -1,11 +1,11 @@
 'use strict';
 
-const d3 = require('d3');
-const { JSDOM } = require('jsdom');
-const fetch = require('node-fetch');
+import * as d3 from 'd3'
+import { JSDOM } from 'jsdom'
+import fetch from 'node-fetch'
 
-const css = require('./style.css.js');
-const twitterIcon = require('./twitter.svg.js');
+import css from './style.css.js'
+import twitterIcon from './twitter.svg.js'
 
 const getBase64Image = async (url) => {
   const response = await fetch(url);
@@ -145,4 +145,4 @@ const createSVG = async (tweets, option) => {
   return document.body.innerHTML;
 };
 
-module.exports = createSVG;
+export default createSVG;

@@ -1,8 +1,8 @@
 'use strict';
 
-const Twitter = require('twitter');
-const createSVG = require('../src/createSVG');
-const layouts = require('../src/layouts');
+import Twitter from 'twitter';
+import createSVG from '../src/createSVG.js'
+import layouts from '../src/layouts.js'
 
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -14,7 +14,7 @@ const client = new Twitter({
 const deploy_env = process.env.DEPLOY_ENV || 'develop';
 const isProduction = deploy_env === 'production';
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   const {
     id,
     layout = 'normal',

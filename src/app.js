@@ -1,9 +1,9 @@
 'use strict';
 
-const express = require('express');
-const app = express();
-const api = require('../api');
+import express from 'express'
+import api from '../api/index.js'
 
+const app = express();
 app.get('/api', api);
 
-module.exports = app;
+export default app;
