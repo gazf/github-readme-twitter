@@ -29,7 +29,7 @@ describe("Test /api", () => {
     expect(response.type).toBe('image/svg+xml');
     
     const document = new JSDOM(response.body.toString()).window.document;
-    expect(document.getElementsByClassName('card-bg')[0]).toBe(undefined);
+    expect(document.getElementsByClassName('card-bg')[0]).not.toBeDefined();
   });
 
   test("should the show_reply option", async () => {
@@ -42,5 +42,14 @@ describe("Test /api", () => {
     const response = await request(app).get("/api?id=twitter&show_retweet=off");
     expect(response.statusCode).toBe(200);
     expect(response.type).toBe('image/svg+xml');
+  });
+
+  test("should the dark_mode option", async () => {
+    const response = await request(app).get("/api?id=twitter&dark_mode=on");
+    expect(response.statusCode).toBe(200);
+    expect(response.type).toBe('image/svg+xml');
+
+    const document = new JSDOM(response.body.toString()).window.document;
+    expect(document.getElementsByClassName('darkmode')[0]).toBeDefined();
   });
 });

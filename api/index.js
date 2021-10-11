@@ -20,7 +20,8 @@ export default async (req, res) => {
     layout = 'normal',
     show_border = 'on',
     show_retweet = 'on',
-    show_reply = 'on'
+    show_reply = 'on',
+    dark_mode = 'off'
   } = req.query;
 
   if (!id) {
@@ -28,10 +29,11 @@ export default async (req, res) => {
     return;
   }
 
-  const option = { 
+  const option = {
     show_border: show_border === 'on',
     show_retweet: show_retweet === 'on',
     show_reply: show_reply === 'on',
+    dark_mode: dark_mode === 'on',
     ...(layouts[layout] || layouts.normal)
   };
 

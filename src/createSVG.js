@@ -28,20 +28,31 @@ const appendDefs = (node, option) => {
     .attr('id', 'lg0')
     .attr('x1', '0%').attr('y1', '100%')
     .attr('x2', '0%').attr('y2', '0%')
-  lg.append('stop')
-    .attr('offset', 0)
-    .attr('stop-color', '#fff')
-    .attr('stop-opacity', 1);
-  lg.append('stop')
-    .attr('offset', '100%')
-    .attr('stop-color', '#fff')
-    .attr('stop-opacity', 0);
+  if(option.dark_mode) {
+    lg.append('stop')
+      .attr('offset', 0)
+      .attr('stop-color', '#000')
+      .attr('stop-opacity', 1);
+    lg.append('stop')
+      .attr('offset', '100%')
+      .attr('stop-color', '#000')
+      .attr('stop-opacity', 0);
+  } else {
+    lg.append('stop')
+      .attr('offset', 0)
+      .attr('stop-color', '#fff')
+      .attr('stop-opacity', 1);
+    lg.append('stop')
+      .attr('offset', '100%')
+      .attr('stop-color', '#fff')
+      .attr('stop-opacity', 0);
+  }
 };
 
 const appendBackground = (node, option) => {
   if (option.show_border) {
     node.append('rect')
-      .attr('class', 'card-bg')
+      .attr('class', !option.dark_mode ? 'card-bg' : 'card-bg darkmode')
       .attr('x', 0.5).attr('y', 0.5)
       .attr('rx', 4.5)
       .attr('width', option.width - 1)
@@ -60,7 +71,7 @@ const appendHeader = (node, option) => {
     .attr('transform', 'translate(65, 35)')
     .attr('x', 0).attr('y', 0)
     .append('text')
-      .attr('class', 'header')
+      .attr('class', !option.dark_mode ? 'header' : 'header darkmode')
       .attr('x', 0).attr('y', 0)
       .text('Latest Tweets');
 };
@@ -102,15 +113,15 @@ const appendTweet = (node, context, option) => {
     .attr('width', '100%');
   
   header.append('span')
-    .attr('class', 'tw-name')
+    .attr('class', !option.dark_mode ? 'tw-name' : 'tw-name darkmode')
     .text(user.name);
   
   header.append('span')
-    .attr('class', 'tw-screen-name')
+    .attr('class', !option.dark_mode ? 'tw-screen-name' : 'tw-screen-name darkmode')
     .text(`@${user.screen_name}`);
   
   tweet.append('p')
-    .attr('class', 'tw-text')
+    .attr('class', !option.dark_mode ? 'tw-text' : 'tw-text darkmode')
     .text(text);
   
   g.append('rect')
